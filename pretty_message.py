@@ -8,3 +8,4 @@ def check_pretty(json):
     weight = json["weight"]
     return f"{name} has  {weight} weight\n {calories} calories,\n {total_fat:.3f} fats,\n" \
            f" {carbs:.3f} carbs,\n {protein:.3f} proteins,\n {water:.3f} water \n"
+

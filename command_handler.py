@@ -66,3 +66,15 @@ def handle_user_food(command, user_info):
     ate_today = "\n".join(total_result)
     print(ate_today)
     return ate_today
+
+
+def handle_today_calories(command, user_info):
+    calories = func_today_calories(user_info)
+    target_calories = func_get_calories(user_info)["target_calories"]
+    return f"You ate {calories} of your {target_calories} calories => <i><b>{calories / target_calories * 100:.2f}%</b></i> "
+
+
+def handle_today_protein(command, user_info):
+    target_protein = func_get_target_protein(user_info)["target_protein"]
+    protein = func_today_protein(user_info)
+    return f"You ate {protein:.2f} of {target_protein} gram of protein => <i><b>{protein / target_protein * 100:.2f}%</b></i> "

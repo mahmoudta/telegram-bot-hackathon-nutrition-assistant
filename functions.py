@@ -6,7 +6,7 @@ import calories_calculator
 
 
 def func_start(command):
-    return "received command " + command[1:]
+    return func_help(command)
 
 
 def func_cunsumed(command, user_info):
@@ -18,8 +18,10 @@ def func_cunsumed(command, user_info):
                                          nutrition["protein"], nutrition["total_fat"], nutrition["carbs"],
                                          nutrition["water"])
 
-        now = datetime.date.today()
-        now = now.strftime('%Y-%m-%d')
+        # now = datetime.date.today()
+        # now = now.strftime('%Y-%m-%d')
+        today_date = datetime.date.today()
+        now = today_date.strftime('%Y-%m-%d')
 
         results = Dao.insert_or_increment_food_user(user_info['id'], food_id, now, 1)
         if results:
@@ -85,6 +87,28 @@ def func_get_bmi(user_info):
         print("exception provoked from function.func_get_calories")
 
 
+def func_today_calories(user_info):
+    try:
+        data_list = Dao.get_today_food_progress(user_info["id"])
+        print(data_list)
+        result = data_list[0]["sum(calories)"]
+    except IndexError:
+        result = "You ate nothing"
+
+    return result
+
+
+def func_today_protein(user_info):
+    try:
+        data_list = Dao.get_today_food_progress(user_info["id"])
+        print(data_list)
+        result = data_list[0]["sum(protein)"]
+    except IndexError:
+        result = "You ate nothing"
+
+    return result
+
+
 def func_get_user_food(user_info):
     try:
         return Dao.get_all_user_food(user_info["id"])
@@ -92,10 +116,17 @@ def func_get_user_food(user_info):
         print("exception provoked from function.func_get_user_food")
 
 
+def func_get_target_protein(user_info):
+    try:
+        return Dao.get_target_protein(user_info["id"])
+    except:
+        print("exception provoked from function.func_get_target_protein")
+
+
 def func_help(command):
     return 'commands list :\n ' \
            '/start  to initi details.\n ' \
-           '/insert insert your data as followd <age> <height> <weight> <gender> <exercise> gender exercise should be (M|F) exercise should be (low|medium|high).\n ' \
+           '/insert insert your data as follows <age> <height> <weight> <gender> <exercise> gender exercise should be (M|F) exercise should be (low|medium|high).\n ' \
            '/check  to check nutrethion in food.\n ' \
            '/calories  get you recommended remainig calories for the day.\n ' \
            '/consume  inform us of a consumed food to update.\n ' \

@@ -163,7 +163,21 @@ def get_all_user_food(user_id):
         print(e)
 
 
-def get_today_food_progresss(user_id):
+def get_target_protein(user_id):
+    query = f"select target_goals.target_protein from user, target_goals where user.id = target_goals.user_id and " \
+            f"user.id = {user_id} "
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+            return result
+            # if result == None
+    except Exception as e:
+        print("get_or_insert_name")
+        print(e)
+
+
+def get_today_food_progress(user_id):
     today_date = datetime.date.today()
     formated_today_date = today_date.strftime('%Y-%m-%d')
     # 2020-2-10
@@ -175,7 +189,7 @@ def get_today_food_progresss(user_id):
     sum(water) 
     FROM food_user 
     JOIN food on food_id = food.id 
-    where food_user.user_id=1 and date_now BETWEEN "{formated_today_date} 00:00:00" AND "{formated_today_date} 23:59:59";'''
+    where food_user.user_id={user_id} and date_now BETWEEN "{formated_today_date} 00:00:00" AND "{formated_today_date} 23:59:59"'''
 
     with connection.cursor() as cursor:
         cursor.execute(query)
