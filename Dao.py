@@ -68,7 +68,7 @@ def insert_user(id, name, age, height, weight, gender):
             cursor.execute(query, args=[id, name, age, height, weight, gender])
             connection.commit()
     except Exception as e:
-        print("insert_pokemon_type")
+        print("insert_user")
         print(e)
         return e
 
@@ -82,7 +82,7 @@ def insert_user_target(user_id, target_weight, target_calories, target_protein, 
     try:
         with connection.cursor() as cursor:
             query = 'INSERT into target_goals(user_id, target_weight, target_calories, target_protein, target_fat) ' \
-                    'values (%s,%s,%s,%s,%s,%s)'
+                    'values (%s,%s,%s,%s,%s)'
             cursor.execute(query, args=[user_id, target_weight, target_calories, target_protein, target_fat])
             connection.commit()
     except Exception as e:
