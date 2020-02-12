@@ -3,7 +3,7 @@ import bot_testing
 
 # base urls
 TOKEN = '1040555856:AAEeMTa4pUEa_ERPYtf8dhMCisGaqVXG_18'
-NGROK_URL = 'https://da4d3727.ngrok.io'
+NGROK_URL = 'https://325c06ce.ngrok.io'
 BASE_TELEGRAM_URL = 'https://api.telegram.org/bot{}'.format(TOKEN)
 LOCAL_WEBHOOK_ENDPOINT = '{}/message'.format(NGROK_URL)
 
