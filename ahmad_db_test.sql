@@ -22,10 +22,10 @@ use sql_testing;
 -- INSERT INTO food_user VALUES (1, 2, STR_TO_DATE("2020-2-5 6:55",'%Y-%m-%d %h:%i'),1);
 
 
-SELECT * from food_user
+SELECT sum(calories), sum(protein), sum(fat), sum(carbs), sum(water) from food_user
 JOIN food 
 on food_id = food.id
-where date_now BETWEEN "2020-2-5 00:00:00" AND "2020-2-12 23:59:59";
+where date_now BETWEEN "2020-2-10 00:00:00" AND "2020-2-10 23:59:59";
 
 
 
