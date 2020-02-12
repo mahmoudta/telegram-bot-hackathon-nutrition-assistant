@@ -23,9 +23,11 @@ def func_init(command, user_info):
 
     insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight, gender_bool)
     if insert_result:
-
         target_calories = calories_calculator.calculate_daily_calories(height, weight, age, gender, exercise)
+        print(target_calories)
         target_result = Dao.insert_user_target(user_info['id'], 0, target_calories, 0, 0)
+        print(target_calories)
+        print(target_result)
     else:
         toreturn = "init failed"
     return toreturn
