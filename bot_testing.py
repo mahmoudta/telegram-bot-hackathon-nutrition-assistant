@@ -1,10 +1,8 @@
-
-
-def print_message_info(chatinfo,message):
+def print_message_info(chatinfo, message):
     try:
         print("from print_message_info")
         print("message: " + message)
-        print("from " + "id: "+str(chatinfo['id'])+" username: "+chatinfo['username'])
+        print("from " + "id: " + str(chatinfo['id']) + " username: " + chatinfo['username'])
 
     except:
         print("exception provoked from bot_testing.print_message_info ")
