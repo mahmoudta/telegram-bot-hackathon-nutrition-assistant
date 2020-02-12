@@ -10,24 +10,22 @@ def func_start(command):
 
 def func_init(command, user_info):
     var_list = command.split()[1:]
-    age = var_list[1]
-    height = var_list[2]
-    weight = var_list[3]
-    gender = var_list[4]
+    age = var_list[0]
+    height = var_list[1]
+    weight = var_list[2]
+    gender = var_list[3]
     if gender == "M":
-        genderbool = True
+        gender_bool = True
     elif gender == "F":
-        genderbool = False
+        gender_bool = False
 
-    exercise = var_list[5]
+    exercise = var_list[4]
 
-    insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight, genderbool)
+    insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight, gender_bool)
     if insert_result:
 
         target_calories = calories_calculator.calculate_daily_calories(height, weight, age, gender, exercise)
-        targetresilt=Dao.insert_user_target(user_info['id'], 0, target_calories, 0, 0)
-
-
+        target_result = Dao.insert_user_target(user_info['id'], 0, target_calories, 0, 0)
     else:
         toreturn = "init failed"
     return toreturn
