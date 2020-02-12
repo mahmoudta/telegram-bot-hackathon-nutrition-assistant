@@ -205,6 +205,22 @@ def get_target_protein(user_id):
         print(e)
 
 
+def get_all_user_id():
+    query = f"select id from user"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            result_list = list()
+            for i in result:
+                result_list.append(i["id"])
+            return result_list
+            # if result == None
+    except Exception as e:
+        print("get_all_user_id")
+        print(e)
+
+
 def get_today_food_progress(user_id):
     today_date = datetime.date.today()
     formated_today_date = today_date.strftime('%Y-%m-%d')
