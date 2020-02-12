@@ -1,9 +1,11 @@
 import pymysql
+import datetime
+
 
 connection = pymysql.connect(
     host="localhost",
     user="root",
-    password="toor2005",
+    password="",
     db="sql_testing",
     charset="utf8",
     cursorclass=pymysql.cursors.DictCursor
@@ -130,3 +132,28 @@ def get_calories_for_user(user_id):
     except Exception as e:
         print("get_or_insert_name")
         print(e)
+
+
+def get_today_food_progresss(user_id):
+    today_date = datetime.date.today()
+    formated_today_date = today_date.strftime('%Y-%m-%d')
+    # 2020-2-10
+    query = f'''SELECT 
+    sum(calories), 
+    sum(protein), 
+    sum(fat), 
+    sum(carbs), 
+    sum(water) 
+    FROM food_user 
+    JOIN food on food_id = food.id 
+    where food_user.user_id=1 and date_now BETWEEN "{formated_today_date} 00:00:00" AND "{formated_today_date} 23:59:59";'''
+
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+
+
+
+if __name__ == "__main__":
+    print(get_today_food_progresss(2))
