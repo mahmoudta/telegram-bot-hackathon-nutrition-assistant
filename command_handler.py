@@ -78,3 +78,9 @@ def handle_today_protein(command, user_info):
     target_protein = func_get_target_protein(user_info)["target_protein"]
     protein = func_today_protein(user_info)
     return f"You ate {protein:.2f} of {target_protein} gram of protein => <i><b>{protein / target_protein * 100:.2f}%</b></i> "
+
+
+def handle_all_info(command, user_info):
+    protein_text = handle_today_protein(command, user_info)
+    calories_text = handle_today_calories(command, user_info)
+    return f"{protein_text}\n {calories_text}"

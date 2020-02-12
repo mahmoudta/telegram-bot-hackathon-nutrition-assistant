@@ -7,9 +7,10 @@ direct_commands = {'/start': command_handler.handle_start,
                    '/calories': command_handler.handle_get_calories,
                    '/consume': command_handler.handle_consume,
                    '/bmi': command_handler.handle_bmi,
-                   '/today': command_handler.handle_user_food,
+                   '/ate': command_handler.handle_user_food,
                    '/todaycal': command_handler.handle_today_calories,
-                   '/todayprot': command_handler.handle_today_protein
+                   '/todayprot': command_handler.handle_today_protein,
+                   '/today': command_handler.handle_all_info
                    }
 
 

@@ -52,8 +52,9 @@ def func_init(command, user_info):
     if insert_result:
         target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender,
                                                                        exercise)
+        target_protein = calories_calculator.calculate_protein_intake(int(weight))
         print(target_calories)
-        target_result = Dao.insert_user_target(user_info['id'], 0, target_calories, 0, 0)
+        target_result = Dao.insert_user_target(user_info['id'], 0, target_calories, target_protein, 0)
         print(target_calories)
         print(target_result)
         response = "You got inserted"
