@@ -1,4 +1,5 @@
 from functions import *
+from prettytable import PrettyTable
 
 
 def handle_start(command, user_info):
@@ -81,6 +82,16 @@ def handle_today_protein(command, user_info):
 
 
 def handle_all_info(command, user_info):
-    protein_text = handle_today_protein(command, user_info)
-    calories_text = handle_today_calories(command, user_info)
-    return f"{protein_text}\n {calories_text}"
+    calories = func_today_calories(user_info)
+    target_calories = func_get_calories(user_info)["target_calories"]
+    protein = func_today_protein(user_info)
+    target_protein = func_get_target_protein(user_info)["target_protein"]
+    protein_nice = "{0:.2f}".format(protein)
+
+    protein_percentage = "{0:.2f}".format(protein / target_protein * 100)
+    calories_percentage = "{0:.2f}".format(calories / target_calories * 100)
+
+    t = PrettyTable(['Type', 'Consumed', 'Target', "   %   "])
+    t.add_row(['Calories', calories, target_calories, calories_percentage + "%"])
+    t.add_row(['Protein', protein_nice, target_protein, protein_percentage + "%"])
+    return f"{t.__str__()} \n"
