@@ -130,3 +130,16 @@ def get_calories_for_user(user_id):
     except Exception as e:
         print("get_or_insert_name")
         print(e)
+
+
+def get_bmi(user_id):
+    query = f"select height,weight from user where user.id = {user_id} "
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+            return result
+            # if result == None
+    except Exception as e:
+        print("get_or_insert_name")
+        print(e)

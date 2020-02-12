@@ -49,3 +49,13 @@ def handle_get_calories(command, user_info):
     target_calories = func_get_calories(user_info)["target_calories"]
     result = f"Your daily intake of calories should be {target_calories} calories per day"
     return result
+
+
+def handle_bmi(command, user_info):
+    total_result = func_get_bmi(user_info)
+    height = total_result["height"]
+    weight = total_result["weight"]
+    bmi = calories_calculator.calculate_bmi(weight, height)
+    bmi_status = calories_calculator.get_adults_bmi_status(bmi)
+    result = f"Your BMI is {bmi:.2f} and you are {bmi_status}"
+    return result
