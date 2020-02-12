@@ -1,4 +1,5 @@
 import pymysql
+import datetime
 
 connection = pymysql.connect(
     host="localhost",
@@ -154,9 +155,29 @@ def get_all_user_food(user_id):
             result = cursor.fetchall()
             result_list = list()
             for i in result:
-                result_list.append( i["name"])
+                result_list.append(i["name"])
             return result_list
             # if result == None
     except Exception as e:
         print("get_or_insert_name")
         print(e)
+
+
+def get_today_food_progresss(user_id):
+    today_date = datetime.date.today()
+    formated_today_date = today_date.strftime('%Y-%m-%d')
+    # 2020-2-10
+    query = f'''SELECT 
+    sum(calories), 
+    sum(protein), 
+    sum(fat), 
+    sum(carbs), 
+    sum(water) 
+    FROM food_user 
+    JOIN food on food_id = food.id 
+    where food_user.user_id=1 and date_now BETWEEN "{formated_today_date} 00:00:00" AND "{formated_today_date} 23:59:59";'''
+
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
