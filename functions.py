@@ -13,6 +13,8 @@ def func_cunsumed(command, user_info):
     try:
         sentence = " ".join(command.split()[1:])
         nutrition = edamam_api.get_nutritions(sentence)
+        if not nutrition:
+            return "Wrong spelling or undefined unit"
 
         food_id = Dao.get_or_insert_food(nutrition["name"], nutrition["weight"], nutrition["calories"],
                                          nutrition["protein"], nutrition["total_fat"], nutrition["carbs"],

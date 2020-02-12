@@ -94,4 +94,4 @@ def handle_all_info(command, user_info):
     t = PrettyTable(['Type', 'Consumed', 'Target', "   %   "])
     t.add_row(['Calories', calories, target_calories, calories_percentage + "%"])
     t.add_row(['Protein', protein_nice, target_protein, protein_percentage + "%"])
-    return f"{t.__str__()} \n"
+    return f"{t.__str__()}\n Remaining calories are <i>{target_calories - calories}</i> \n"

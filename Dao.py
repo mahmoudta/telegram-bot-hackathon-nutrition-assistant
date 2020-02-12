@@ -76,6 +76,34 @@ def insert_user(id, name, age, height, weight, gender):
         return e
 
 
+def insert_half_user(id, name, age, height, weight):
+    try:
+        with connection.cursor() as cursor:
+            query = 'INSERT into User(id,name,age,height,weight) values (%s,%s,%s,%s,%s)'
+            cursor.execute(query, args=[id, name, age, height, weight])
+            connection.commit()
+            return True
+    except Exception as e:
+        return False
+        print("insert_half_user")
+        print(e)
+        return e
+
+
+def update_half_user_gender(id, gender):
+    try:
+        with connection.cursor() as cursor:
+            q = f"UPDATE User SET gender = {gender} where User.id = {id}"
+            cursor.execute(q)
+            connection.commit()
+            return True
+    except Exception as e:
+        return False
+        print("update_half_user_gender")
+        print(e)
+        return e
+
+
 # --   user_id INT,
 # --   target_weight INT,
 # --   target_calories INT,
