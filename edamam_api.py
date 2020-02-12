@@ -55,19 +55,24 @@ def get_labels(json_nutrition):
 def get_weight(json_nutrition):
     return json_nutrition['totalWeight']
 
+def get_nutritions(food_text):
+    nutrition_json = get_nutrition_json(food_text)
+    nutritions = {
+        'name': get_name(nutrition_json),
+        'calories': get_total_cal(nutrition_json),
+        'total fat': get_total_fat(nutrition_json),
+        'saturated fat': get_saturated_fat(nutrition_json),
+        'unsaturated fat': get_unsaturated_fat(nutrition_json),
+        'carbs': get_carbs(nutrition_json),
+        'protein': get_protein(nutrition_json),
+        'sugars': get_sugars(nutrition_json),
+        'water': get_water(nutrition_json),
+        'weight': get_weight(nutrition_json),
+        'labels': get_labels(nutrition_json)
+    }
+    return nutritions
 
 if __name__ == "__main__":
-    nutritions = get_nutrition_json('apple')
-    print('name: ' ,nutritions['name'])
-    print('calories: ', get_total_cal(nutritions))
-    print('total fat: ', get_total_fat(nutritions))
-    print('saturated fat: ', get_saturated_fat(nutritions))
-    print('unsaturated fat: ', get_unsaturated_fat(nutritions))
-    print('carbs: ', get_carbs(nutritions))
-    print('protein: ', get_protein(nutritions))
-    print('sugars: ', get_sugars(nutritions))
-    print('water: ', get_water(nutritions))
-    print('weight: ', get_weight(nutritions))
-    print('labels: ', get_labels(nutritions))
+    print(get_nutritions('3 apple'))
 
 
