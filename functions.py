@@ -1,12 +1,34 @@
+import datetime
 import edamam_api
 import Dao
 import pretty_message
 import calories_calculator
 
 
+
 def func_start(command):
     return "received command " + command[1:]
 
+def func_cunsumed(command, user_info):
+    try:
+        sentence = " ".join(command.split()[1:])
+        nutrition = edamam_api.get_nutritions(sentence)
+
+
+        food_id = Dao.get_or_insert_food(nutrition["name"],nutrition["weight"],nutrition["calories"],nutrition["protein"],nutrition["total_fat"],nutrition["carbs"],nutrition["water"])
+
+        now=datetime.date.today()
+        now=now.strftime('%Y-%m-%d')
+
+        results=Dao.insert_or_increment_food_user(user_info['id'],food_id,now,1)
+        if results:
+            toreturn = pretty_message.check_pretty(nutrition)
+        else:
+            toreturn="failed to add food"
+    except:
+        print("exception provoked from functhion.func_check")
+
+    return toreturn
 
 def func_init(command, user_info):
     var_list = command.split()[1:]
@@ -41,7 +63,6 @@ def func_check(command):
         sentence = " ".join(command.split()[1:])
         toreturn = edamam_api.get_nutritions(sentence)
         toreturn = pretty_message.check_pretty(toreturn)
-        print(toreturn)
     except:
         print("exception provoked from functhion.func_check")
 
