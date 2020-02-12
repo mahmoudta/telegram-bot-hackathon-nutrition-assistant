@@ -108,7 +108,9 @@ def insert_or_increment_food_user(user_id, food_id, date_now, amount):
             query = 'INSERT into food_user(user_id, food_id, date_now, amount) values (%s,%s,%s,%s)'
             cursor.execute(query, args=[user_id, food_id, date_now, amount])
             connection.commit()
+            return True
     except Exception as e:
         print("insert_or_increment_food_user")
+        return False
         print(e)
         return e
