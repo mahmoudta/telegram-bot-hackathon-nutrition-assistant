@@ -60,9 +60,9 @@ def get_nutritions(food_text):
     nutritions = {
         'name': get_name(nutrition_json),
         'calories': get_total_cal(nutrition_json),
-        'total fat': get_total_fat(nutrition_json),
-        'saturated fat': get_saturated_fat(nutrition_json),
-        'unsaturated fat': get_unsaturated_fat(nutrition_json),
+        'total_fat': get_total_fat(nutrition_json),
+        'saturated_fat': get_saturated_fat(nutrition_json),
+        'unsaturated_fat': get_unsaturated_fat(nutrition_json),
         'carbs': get_carbs(nutrition_json),
         'protein': get_protein(nutrition_json),
         'sugars': get_sugars(nutrition_json),

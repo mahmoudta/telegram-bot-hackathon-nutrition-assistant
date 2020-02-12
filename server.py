@@ -17,11 +17,12 @@ def handle_message():
     try:
         chat_data = request.get_json()
 
+        user_info=chat_data['message']['chat']
         message = chat_data['message']['text']
 
-        bot_testing.print_message_info(chat_data['message']['chat'], message)
+        bot_testing.print_message_info(user_info, message)
 
-        tosendback = command_handler.parse_message(message)
+        tosendback = command_handler.parse_message(message,user_info)
 
         send_message_to_user(chat_data, tosendback)
     except:
