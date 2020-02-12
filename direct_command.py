@@ -6,7 +6,8 @@ direct_commands = {'/start': command_handler.handle_start,
                    '/insert': command_handler.handle_init,
                    '/calories': command_handler.handle_get_calories,
                    '/consume': command_handler.handle_consume,
-                   '/bmi': command_handler.handle_bmi
+                   '/bmi': command_handler.handle_bmi,
+                   '/today':command_handler.handle_user_food
                    }
 
 

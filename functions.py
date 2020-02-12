@@ -85,6 +85,13 @@ def func_get_bmi(user_info):
         print("exception provoked from function.func_get_calories")
 
 
+def func_get_user_food(user_info):
+    try:
+        return Dao.get_all_user_food(user_info["id"])
+    except:
+        print("exception provoked from function.func_get_user_food")
+
+
 def func_help(command):
     return 'commands list :\n ' \
            '/start  to initi details.\n ' \

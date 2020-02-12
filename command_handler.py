@@ -59,3 +59,10 @@ def handle_bmi(command, user_info):
     bmi_status = calories_calculator.get_adults_bmi_status(bmi)
     result = f"Your BMI is {bmi:.2f} and you are {bmi_status}"
     return result
+
+
+def handle_user_food(command, user_info):
+    total_result = func_get_user_food(user_info)
+    ate_today = "\n".join(total_result)
+    print(ate_today)
+    return ate_today

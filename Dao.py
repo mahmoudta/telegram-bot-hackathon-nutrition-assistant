@@ -143,3 +143,20 @@ def get_bmi(user_id):
     except Exception as e:
         print("get_or_insert_name")
         print(e)
+
+
+def get_all_user_food(user_id):
+    query = f"select f.name from food as f, food_user as fu, User as u where" \
+            f" f.id = fu.food_id and fu.user_id = u.id and u.id =  {user_id} "
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            result_list = list()
+            for i in result:
+                result_list.append( i["name"])
+            return result_list
+            # if result == None
+    except Exception as e:
+        print("get_or_insert_name")
+        print(e)
