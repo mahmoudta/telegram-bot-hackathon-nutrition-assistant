@@ -42,7 +42,21 @@ def get_adults_bmi_status(bmi):
         return 'Obese Class III'
 
 
+def get_expected_calories_during_duration(current_weight, target_weight, duration, height, age, gender, exercise):
+    weight_difference = target_weight - current_weight
+    calorie_difference = weight_difference * 2.20462 * 3500
+    calorie_difference_per_day = calorie_difference / duration
+    normal_calories_per_day = calculate_daily_calories(height, current_weight, age, gender, exercise)
+    target_calories_per_day = normal_calories_per_day + calorie_difference_per_day
+
+    if target_calories_per_day > 1500:
+        return target_calories_per_day
+    else:
+        return "unreasonable"
+
+
 if __name__ == "__main__":
-    print(calculate_daily_calories(190, 95, 30, 'M', 'low'))
-    bmi = calculate_bmi(95, 190)
+    print(calculate_daily_calories(185, 80, 24, 'M', 'low'))
+    bmi = calculate_bmi(80, 185)
     print(get_adults_bmi_status(bmi))
+    print(get_expected_calories_during_duration(75, 70, 50, 175, 25, 'M', 'low'))
