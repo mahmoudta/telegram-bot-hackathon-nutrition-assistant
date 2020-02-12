@@ -17,7 +17,7 @@ TELEGRAM_SEND_MESSAGE_URL=BASE_TELEGRAM_URL+'/sendMessage?chat_id={}&text={}'
 requests.get(TELEGRAM_INIT_WEBHOOK_URL)
 
 
-def send_back_to_user(chat_data,tosendback):
+def send_message_to_user(chat_data,tosendback):
     chat_id = chat_data['message']['chat']['id']
     res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(chat_id, tosendback))
     bot_testing.print_server_respond(res)

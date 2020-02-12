@@ -1,4 +1,5 @@
 from flask import Flask, Response, request
+
 from connect_to_bot import *
 
 import bot_testing
@@ -21,7 +22,7 @@ def handle_message():
 
         tosendback =command_handler.parse_message(message)
 
-        send_back_to_user(chat_data,tosendback)
+        send_message_to_user(chat_data,tosendback)
     except:
         print("exception provoked from server.handle_message")
 
