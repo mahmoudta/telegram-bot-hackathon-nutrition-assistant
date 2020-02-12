@@ -11,19 +11,19 @@ def sanity():return "Server is running"
 
 @app.route('/message', methods=["POST"])
 def handle_message():
+
     try:
         chat_data=request.get_json()
 
         message = chat_data['message']['text']
 
-        bot_testing.print_message_info(chat_data)
+        bot_testing.print_message_info(chat_data['message']['chat'],message)
 
-        tosendback =command_handler.message_parser(message)
+        tosendback =command_handler.parse_message(message)
 
         send_back_to_user(chat_data,tosendback)
-
     except:
-        print("eception provoked")
+        print("exception provoked from server.handle_message")
 
     return Response("success")
 

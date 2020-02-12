@@ -1,7 +1,7 @@
 import math
 
 def start(command):
-    return "reseved comand "+command[1:]
+    return "received command "+command[1:]
 
 def help(command):
     return 'commands list :\n ' \

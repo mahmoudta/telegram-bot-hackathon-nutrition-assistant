@@ -2,7 +2,7 @@ from functions import *
 
 
 def handle_start(command):
-    respond = "no <arg> for start, try again"
+    respond = "there should be no<arg> for start, try again"
     arg = command.split()
     if len(arg) == 1:
         respond = start(command)
@@ -11,7 +11,7 @@ def handle_start(command):
 
 
 def handle_help(command):
-    respond = "no <arg> for help, try again"
+    respond = "there should be no <arg> for help, try again"
     arg = command.split()
     if len(arg) == 1:
         respond = help(command)
@@ -24,12 +24,18 @@ direct_commands = {'/start': handle_start,
                  }
 
 
-def message_parser(message):
-    message_command = message.split()[0]
+def parse_message(message):
 
-    if message_command in direct_commands:
-        tosendback = direct_commands[message_command](message)
-    else:
-        tosendback = "wrong command try again"
+    try:
+        message_command = message.split()[0]
+
+        if message_command in direct_commands:
+            tosendback = direct_commands[message_command](message)
+        else:
+            tosendback = "wrong command try again"
+
+
+    except:
+        print("exception provoked from command_handler.parse_message ")
 
     return tosendback
