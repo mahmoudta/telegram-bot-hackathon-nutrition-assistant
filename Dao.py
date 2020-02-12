@@ -153,7 +153,3 @@ def get_today_food_progresss(user_id):
         result = cursor.fetchall()
         return result
 
-
-
-if __name__ == "__main__":
-    print(get_today_food_progresss(2))
