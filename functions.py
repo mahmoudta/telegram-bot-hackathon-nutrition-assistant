@@ -88,5 +88,9 @@ def func_get_bmi(user_info):
 def func_help(command):
     return 'commands list :\n ' \
            '/start  to initi details.\n ' \
+           '/insert insert your data as followd <age> <height> <weight> <gender> <exercise> gender exercise should be (M|F) exercise should be (low|medium|high).\n ' \
            '/check  to check nutrethion in food.\n ' \
+           '/calories  get you recommended remainig calories for the day.\n ' \
+           '/consume  inform us of a consumed food to update.\n ' \
+           '/bmi  inform us of a consumed food .\n ' \
            '/help - to get to this* command list. \n '

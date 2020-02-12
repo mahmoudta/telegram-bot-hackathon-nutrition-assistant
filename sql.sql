@@ -1,5 +1,5 @@
 use sql_testing;
-
+-- CREATE DATABASE sql_testing;
 
 drop table if exists food_user;
 drop table if exists target_goals;
@@ -17,8 +17,6 @@ CREATE TABLE User (
 );
 
 
-
--- insert into user(id,name,age,height,weight,gender) where
 
 CREATE TABLE food (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,3 +47,12 @@ CREATE TABLE target_goals (
   FOREIGN KEY (user_id) REFERENCES User(id),
   UNIQUE KEY(user_id)
 );
+
+-- insert into food(name,weight,calories,protein,fat,carbs,water)
+--  values('banana',1,10,0.5,0.4,10,20);
+
+
+-- insert into 
+
+use sql_testing;
+select * from food;
