@@ -73,6 +73,6 @@ def get_nutritions(food_text):
     return nutritions
 
 if __name__ == "__main__":
-    print(get_nutritions('3 apple'))
+    print(get_nutritions('1 banana'))
 
 
