@@ -22,15 +22,18 @@ def func_init(command, user_info):
     exercise = var_list[4]
 
     insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight, gender_bool)
+    # def calculate_daily_calories(height, weight, age, gender, exercise):
     if insert_result:
-        target_calories = calories_calculator.calculate_daily_calories(height, weight, age, gender, exercise)
+        target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender,
+                                                                       exercise)
         print(target_calories)
         target_result = Dao.insert_user_target(user_info['id'], 0, target_calories, 0, 0)
         print(target_calories)
         print(target_result)
+        response = "You got inserted"
     else:
-        toreturn = "init failed"
-    return toreturn
+        response = "There was an issue"
+    return response
 
 
 def func_check(command):
@@ -43,6 +46,13 @@ def func_check(command):
         print("exception provoked from functhion.func_check")
 
     return toreturn
+
+
+def func_get_calories(user_info):
+    try:
+        return Dao.get_calories_for_user(user_info["id"])
+    except:
+        print("exception provoked from function.func_get_calories")
 
 
 def func_help(command):

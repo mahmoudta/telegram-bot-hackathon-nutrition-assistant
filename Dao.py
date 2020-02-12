@@ -114,3 +114,17 @@ def insert_or_increment_food_user(user_id, food_id, date_now, amount):
         print("insert_or_increment_food_user")
         print(e)
         return e
+
+
+def get_calories_for_user(user_id):
+    query = f"select target_goals.target_calories from user, target_goals where user.id = target_goals.user_id and " \
+            f"user.id = {user_id} "
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+            return result
+            # if result == None
+    except Exception as e:
+        print("get_or_insert_name")
+        print(e)

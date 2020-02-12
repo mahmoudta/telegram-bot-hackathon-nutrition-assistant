@@ -36,10 +36,17 @@ def handle_help(command, user_info):
     return respond
 
 
+def handle_get_calories(command, user_info):
+    target_calories = func_get_calories(user_info)["target_calories"]
+    result = f"Your daily intake of calories should be {target_calories} calories per day"
+    return result
+
+
 direct_commands = {'/start': handle_start,
                    '/help': handle_help,
                    '/check': handle_check,
-                   '/insert': handle_init
+                   '/insert': handle_init,
+                   '/calories': handle_get_calories
                    }
 
 
