@@ -67,7 +67,9 @@ def insert_user(id, name, age, height, weight, gender):
             query = 'INSERT into User(id,name,age,height,weight,gender) values (%s,%s,%s,%s,%s,%s)'
             cursor.execute(query, args=[id, name, age, height, weight, gender])
             connection.commit()
+            return True
     except Exception as e:
+        return False
         print("insert_user")
         print(e)
         return e

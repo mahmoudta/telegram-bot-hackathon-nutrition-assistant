@@ -2,7 +2,7 @@ from math import sqrt
 
 
 def calculate_daily_calories(height, weight, age, gender, exercise):
-    ''' height: 'cm'\n weight: 'kg'\n age: 'year'\n gender:['M', 'F']'''
+    """ height: 'cm'\n weight: 'kg'\n age: 'year'\n gender:['M', 'F']"""
 
     exercise_lifestyle = {
         'low': 1.25,
