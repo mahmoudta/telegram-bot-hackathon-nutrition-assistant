@@ -9,6 +9,14 @@ def handle_start(command):
 
     return respond
 
+def handle_check(command):
+    respond = "there should be two <arg> for check, try again"
+    arg = command.split()
+    if len(arg) == 3:
+        respond = check(command)
+
+    return respond
+
 
 def handle_help(command):
     respond = "there should be no <arg> for help, try again"
@@ -21,6 +29,7 @@ def handle_help(command):
 
 direct_commands = {'/start': handle_start,
                  '/help': handle_help,
+                 '/check': handle_check,
                  }
 
 
