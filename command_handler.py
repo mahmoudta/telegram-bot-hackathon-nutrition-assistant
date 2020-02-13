@@ -153,6 +153,5 @@ def handle_all_info(command, user_info):
     if target_calories < calories:
         extra_extra_info = f"Surplass of <i>{calories - target_calories} calories</i>"
     else:
-        extra_extra_info = f"Remaining calories of <i>{calories - target_calories}</i>"
-
+        extra_extra_info = f"Remaining calories of <i>{target_calories - calories}</i>"
     return f"{extra_info}{t.__str__()}\n{extra_extra_info} \n"

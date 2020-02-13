@@ -27,13 +27,15 @@ def parse_message(message, user_info):
 
     return tosendback
 
-button_commands={
-    'M':command_handler.handle_gender_botton,
-    'F':command_handler.handle_gender_botton,
-    'low':command_handler.handle_exercise_botton,
-    'medium':command_handler.handle_exercise_botton,
-    'high':command_handler.handle_exercise_botton,
+
+button_commands = {
+    'M': command_handler.handle_gender_botton,
+    'F': command_handler.handle_gender_botton,
+    'low': command_handler.handle_exercise_botton,
+    'medium': command_handler.handle_exercise_botton,
+    'high': command_handler.handle_exercise_botton,
 }
+
 
 def button_parser(chat_data):
     try:
@@ -41,7 +43,7 @@ def button_parser(chat_data):
         text = chat_data['message']['text']
 
         if text in button_commands:
-            tosendback = button_commands[text](chat_data['message']['from']['id'],text)
+            tosendback = button_commands[text](chat_data['message']['from']['id'], text)
         else:
             tosendback = "unaccepted input"
 
@@ -50,4 +52,3 @@ def button_parser(chat_data):
         print("exception provoked from command_handler.button_parser ")
 
     return tosendback
-

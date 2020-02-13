@@ -20,10 +20,12 @@ def func_cunsumed(command, user_info):
         #                                  nutrition["protein"], nutrition["total_fat"], nutrition["carbs"],
         #                                  nutrition["water"])
 
-        food_id = Dao.get_or_insert_food(nutrition["name"],nutrition["weight"],nutrition["calories"],nutrition["protein"],nutrition["total_fat"],nutrition["carbs"],nutrition["water"], nutrition['sugar'])
+        food_id = Dao.get_or_insert_food(nutrition["name"], nutrition["weight"], nutrition["calories"],
+                                         nutrition["protein"], nutrition["total_fat"], nutrition["carbs"],
+                                         nutrition["water"])
 
-        now=datetime.date.today()
-        now=now.strftime('%Y-%m-%d')
+        now = datetime.date.today()
+        now = now.strftime('%Y-%m-%d')
 
         results = Dao.insert_or_increment_food_user(user_info['id'], food_id, now, 1)
         if results:
@@ -49,13 +51,14 @@ def gender_bool_to_str(gender):
     else:
         return "F"
 
+
 def func_init(command, user_info):
     var_list = command.split()[1:]
     age = var_list[0]
     height = var_list[1]
     weight = var_list[2]
     gender = var_list[3]
-    gender_bool=gender_str_to_bool(gender)
+    gender_bool = gender_str_to_bool(gender)
     if gender == "M":
         gender_bool = True
     elif gender == "F":
@@ -159,10 +162,8 @@ def func_help(command):
            "/calories, get remaining calories and your current daily calories" \
            "/consume report a food consumption to us \n" \
            "/bmi return your bmi report\n" \
-           "/ate return the food you ate\n"\
+           "/ate return the food you ate\n" \
            "/todaycal return your calories for today\n" \
            "/todayprot return your protein for today\n" \
            "/today return a table with everything\n" \
            "/help - get this command list"
-
-
