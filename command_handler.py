@@ -35,7 +35,8 @@ def handle_init(command, user_info):
     return respond
 
 def handle_atractive_insert(command, user_info):
-    respond = "there should be  <age> <height> <weight> for insert, try again"
+
+    respond = "there should be  <age> <height> <weight> for insert command, try again"
     arg = command.split()
     if len(arg) == 4:
         respond = func_atractive_insert(command, user_info)
@@ -45,11 +46,11 @@ def handle_atractive_insert(command, user_info):
         connect_to_bot.add_botton(user_info['id'], custom_keyboard,title)
     return respond
 
+
+
 def handle_gender_botton(chatid,text):
-    if text == "M":
-        gender_bool = True
-    elif text == "F":
-        gender_bool = False
+
+    gender_bool=gender_str_to_bool(text)
     Dao.update_half_user_gender(chatid,gender_bool)
     connect_to_bot.removepreviusmarkup(chatid)
     custom_keyboard = [['low', 'medium', 'high']]
@@ -64,11 +65,7 @@ def handle_exercise_botton(chatid,text):
     height = user_data["height"]
     weight = user_data["weight"]
     age = user_data["age"]
-    gender = user_data["gender"]
-    if gender:
-        gender_type = "M"
-    else:
-        gender_type = "F"
+    gender_type=gender_bool_to_str(user_data["gender"])
 
     target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender_type, text)
     target_protein = calories_calculator.calculate_protein_intake(int(weight))
@@ -127,6 +124,7 @@ def get_percentage_calories(user_info):
 
 
 def handle_all_info(command, user_info):
+
     calories = func_today_calories(user_info)
     target_calories = func_get_calories(user_info)["target_calories"]
     protein = func_today_protein(user_info)

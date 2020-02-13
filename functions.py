@@ -6,7 +6,7 @@ import calories_calculator
 
 
 def func_start(command):
-    return "start"
+    return func_help(command)
 
 
 def func_cunsumed(command, user_info):
@@ -20,8 +20,6 @@ def func_cunsumed(command, user_info):
                                          nutrition["protein"], nutrition["total_fat"], nutrition["carbs"],
                                          nutrition["water"])
 
-        # now = datetime.date.today()
-        # now = now.strftime('%Y-%m-%d')
         today_date = datetime.date.today()
         now = today_date.strftime('%Y-%m-%d')
 
@@ -31,10 +29,23 @@ def func_cunsumed(command, user_info):
         else:
             toreturn = "failed to add food"
     except:
-        print("exception provoked from functhion.func_check")
+        print("exception provoked from functhion.func_cunsumed")
 
     return toreturn
 
+
+def gender_str_to_bool(str_gender):
+    if str_gender == "M":
+        return True
+    elif str_gender == "F":
+        return False
+
+
+def gender_bool_to_str(gender):
+    if gender:
+        return "M"
+    else:
+        return "F"
 
 def func_init(command, user_info):
     var_list = command.split()[1:]
@@ -42,6 +53,7 @@ def func_init(command, user_info):
     height = var_list[1]
     weight = var_list[2]
     gender = var_list[3]
+    gender_bool=gender_str_to_bool(gender)
     if gender == "M":
         gender_bool = True
     elif gender == "F":
@@ -70,9 +82,9 @@ def func_atractive_insert(command, user_info):
     insert_result = Dao.insert_half_user(user_info['id'], user_info['username'], age, height, weight)
     if insert_result:
 
-        response = "You got inserted"
+        response = " "
     else:
-        response = "There was an issue in functions.func_atractive_insert"
+        response = "failed to insert"
     return response
 
 
@@ -139,11 +151,16 @@ def func_get_target_protein(user_info):
 
 def func_help(command):
     return "commands list :\n" \
-           "/start session \n" \
-           "/insert to insert you data as age, height, weight \n" \
-           "gender is as (M|F) and exercise as (low|medium|high).\n " \
+           "/insert insert you info in order with space between them as age height weight " \
+           "after that you will be asked about the gender and the daily exercise intercity\n" \
            "/check to check nutrition in food\n" \
            "/calories, get remaining calories and your current daily calories" \
-           "/consume item adds food \n" \
-           "/bmi return your bmi\n" \
+           "/consume report a food consumption to us \n" \
+           "/bmi return your bmi report\n" \
+           "/ate return the food you ate\n"\
+           "/todaycal return your calories for today\n" \
+           "/todayprot return your protein for today\n" \
+           "/today return a table with everything\n" \
            "/help - get this command list"
+
+
