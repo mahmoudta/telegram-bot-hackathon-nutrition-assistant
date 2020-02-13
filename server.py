@@ -22,12 +22,12 @@ def handle_message():
         if 'entities' in chat_data['message']:
             user_info = chat_data['message']['chat']
             message = chat_data['message']['text']
-            bot_testing.print_message_info(user_info, message)
+            # bot_testing.print_message_info(user_info, message)
             tosendback = direct_command.parse_message(message, user_info)
+            print(tosendback)
+            send_message_to_user(chat_data, tosendback)
         else:
             direct_command.button_parser(chat_data)
-
-        send_message_to_user(chat_data, tosendback)
 
     except:
         print("exception provoked from server.handle_message")

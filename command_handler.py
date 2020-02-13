@@ -4,7 +4,7 @@ from prettytable import PrettyTable
 
 
 def handle_start(command, user_info):
-    respond = "there should be no<arg> for start, try again"
+    respond = "No arguments e.g /command, try again."
     arg = command.split()
     if len(arg) == 1:
         respond = func_start(command)
@@ -12,24 +12,31 @@ def handle_start(command, user_info):
 
 
 def handle_check(command, user_info):
-    respond = "there should be  <sentence> for check, try again"
+    correct_response = "e.g /check [one apple] or /check [1 apple] command that contains" \
+                       " food and unit, try again."
     arg = command.split()
     if len(arg) > 1:
         respond = func_check(command)
+    else:
+        respond = correct_response
+
     return respond
 
 
 def handle_consume(command, user_info):
-    respond = "there should be  <sentence> for consume, try again"
+    correct_response = "Please enter a sentence after /consume command that contains" \
+                       " food and its unit, e.g /consume [an apple] or /consume [1 apple], try again"
     arg = command.split()
     print(len(arg))
     if len(arg) > 1:
         respond = func_cunsumed(command, user_info)
+    else:
+        respond = correct_response
     return respond
 
 
 def handle_init(command, user_info):
-    respond = "there should be  <age> <height> <weight> <gender> <low|medium|high> for init, try again"
+    respond = "Please insert [age] [height in cm] [weight in kg] [gender] [low|medium|high] for init, try again"
     arg = command.split()
     if len(arg) == 6:
         respond = func_init(command, user_info)
@@ -37,14 +44,15 @@ def handle_init(command, user_info):
 
 
 def handle_atractive_insert(command, user_info):
-    respond = "there should be  <age> <height> <weight> for insert command, try again"
+    the_right_way = "Please insert age ,height in cm, weight in kg for insert command, try again"
     arg = command.split()
     if len(arg) == 4:
         respond = func_atractive_insert(command, user_info)
-
+        title = "Choose your gender"
         custom_keyboard = [['F'], ['M']]
-        title = "chose gender - male or female"
         connect_to_bot.add_botton(user_info['id'], custom_keyboard, title)
+    else:
+        respond = the_right_way
     return respond
 
 
@@ -53,18 +61,25 @@ def handle_gender_botton(chatid, text):
     Dao.update_half_user_gender(chatid, gender_bool)
     connect_to_bot.removepreviusmarkup(chatid)
     custom_keyboard = [['low'], ['medium'], ['high']]
-    title = "chose daily exercise intensity - low or medium or high"
+    title = "Choose your activity type"
     connect_to_bot.add_botton(chatid, custom_keyboard, title)
 
 
+def change_intensity(text):
+    print((text.split()[0]).lower())
+    return (text.split()[0]).lower()
+
+
 def handle_exercise_botton(chatid, text):
+    # print(chatid)
+    # print(text)
     connect_to_bot.removepreviusmarkup(chatid)
     user_data = Dao.get_user_data(chatid)
     height = user_data["height"]
     weight = user_data["weight"]
     age = user_data["age"]
     gender_type = gender_bool_to_str(user_data["gender"])
-
+    # text_intensity = change_intensity(text)
     target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender_type,
                                                                    text)
     target_protein = calories_calculator.calculate_protein_intake(int(weight))
@@ -73,7 +88,7 @@ def handle_exercise_botton(chatid, text):
 
 
 def handle_help(command, user_info):
-    respond = "there should be no <arg> for help, try again"
+    respond = "/help should have no arguments e.g. /help, try again"
     arg = command.split()
     if len(arg) == 1:
         respond = func_help(command)

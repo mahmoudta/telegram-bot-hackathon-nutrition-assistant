@@ -25,7 +25,7 @@ def do_something(sc):
         for id in chat_ids:
             user_info = {"id": id}
             random_int = random.randrange(0, 8)
-            random_int = 5
+            # random_int = 6
             if random_int == 0:
                 res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(id, random_data[0]))
                 res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(id, handle_all_info("", user_info)))

@@ -3,7 +3,7 @@ import command_handler
 direct_commands = {'/start': command_handler.handle_start,
                    '/help': command_handler.handle_help,
                    '/check': command_handler.handle_check,
-                   '/insert': command_handler.handle_atractive_insert,
+                   '/register': command_handler.handle_atractive_insert,
                    '/calories': command_handler.handle_get_calories,
                    '/consume': command_handler.handle_consume,
                    '/bmi': command_handler.handle_bmi,
@@ -39,7 +39,7 @@ button_commands = {
 
 def button_parser(chat_data):
     try:
-
+        print(chat_data)
         text = chat_data['message']['text']
 
         if text in button_commands:

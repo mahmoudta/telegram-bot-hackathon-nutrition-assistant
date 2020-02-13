@@ -23,7 +23,6 @@ requests.get(TELEGRAM_INIT_WEBHOOK_URL)
 def send_message_to_user(chat_data, tosendback):
     chat_id = chat_data['message']['chat']['id']
     res = requests.get(TELEGRAM_SEND_MESSAGE_URL.format(chat_id, tosendback))
-    bot_testing.print_server_respond(res)
     return res
 
 
@@ -49,4 +48,4 @@ def add_botton(chatid, custom_keyboard, title):
 
 def removepreviusmarkup(chatid):
     reply_markup = ReplyKeyboardRemove()
-    res = requests.get(TELEGRAM_SEND_BOTTON_URL.format(chatid, "thanks", reply_markup.to_json()))
+    res = requests.get(TELEGRAM_SEND_BOTTON_URL.format(chatid, "---", reply_markup.to_json()))

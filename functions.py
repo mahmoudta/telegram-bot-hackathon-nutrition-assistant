@@ -97,6 +97,7 @@ def func_check(command):
     try:
         sentence = " ".join(command.split()[1:])
         toreturn = edamam_api.get_nutritions(sentence)
+        print(toreturn)
         toreturn = pretty_message.check_pretty(toreturn)
     except:
         print("exception provoked from functhion.func_check")
@@ -155,15 +156,14 @@ def func_get_target_protein(user_info):
 
 
 def func_help(command):
-    return "commands list :\n" \
-           "/insert insert you info in order with space between them as age height weight " \
-           "after that you will be asked about the gender and the daily exercise intercity\n" \
-           "/check to check nutrition in food\n" \
-           "/calories, get remaining calories and your current daily calories" \
-           "/consume report a food consumption to us \n" \
-           "/bmi return your bmi report\n" \
+    return "Hello!\nNutriBot is a project that help people improve their lifestyle and keep it off\n" \
+           "Commands:\n" \
+           "/register [age] [height] [weight]\n" \
+           "/check [one item], to get the item nutritions\n" \
+           "/calories, get your current daily calories\n" \
+           "/consume [one item], add the item to your net daily calories\n" \
+           "/bmi return a bmi report\n" \
            "/ate return the food you ate\n" \
-           "/todaycal return your calories for today\n" \
-           "/todayprot return your protein for today\n" \
-           "/today return a table with everything\n" \
-           "/help - get this command list"
+           "/todaycal return the calories for the day\n" \
+           "/todayprot return your proteins data for the day\n" \
+           "/today your daily nutrition table\n"
