@@ -78,7 +78,7 @@ def get_nutritions(food_text):
         'unsaturated_fat': get_unsaturated_fat(nutrition_json),
         'carbs': get_carbs(nutrition_json),
         'protein': get_protein(nutrition_json),
-        'sugars': get_sugars(nutrition_json),
+        'sugar': get_sugars(nutrition_json),
         'water': get_water(nutrition_json),
         'weight': get_weight(nutrition_json),
         'labels': get_labels(nutrition_json)
@@ -90,9 +90,9 @@ if __name__ == "__main__":
     nutritions = get_nutrition_json('apple')
     print('name: ', nutritions['name'])
     print('calories: ', get_total_cal(nutritions))
-    print('total fat: ', get_total_fat(nutritions))
-    print('saturated fat: ', get_saturated_fat(nutritions))
-    print('unsaturated fat: ', get_unsaturated_fat(nutritions))
+    print('total_fat: ', get_total_fat(nutritions))
+    print('saturated_fat: ', get_saturated_fat(nutritions))
+    print('unsaturated_fat: ', get_unsaturated_fat(nutritions))
     print('carbs: ', get_carbs(nutritions))
     print('protein: ', get_protein(nutritions))
     print('sugars: ', get_sugars(nutritions))

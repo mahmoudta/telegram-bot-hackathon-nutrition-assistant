@@ -5,8 +5,8 @@ use sql_testing;
 
 
 -- DELETE FROM food_user;
--- INSERT INTO food VALUES("apple", 182, 94, 0, 25, 25, 155);
--- INSERT INTO food VALUES("banana", 116, 102, 1, 0, 26, 86);
+-- INSERT INTO food VALUES("apple", 182, 94, 0, 25, 25, 155, 10);
+-- INSERT INTO food VALUES("banana", 116, 102, 1, 0, 26, 86, 15);
 
 
 -- insert into food(name,weight,calories,protein,fat,carbs,water)
@@ -22,14 +22,14 @@ use sql_testing;
 -- INSERT INTO food_user VALUES (1, 3, STR_TO_DATE("2020-2-12 6:55",'%Y-%m-%d %h:%i'),1);
 
 
-SELECT food_user.user_id, sum(calories), sum(protein), sum(fat), sum(carbs), sum(water) from food_user
-JOIN food 
-on food_id = food.id
-where food_user.user_id=1 and date_now BETWEEN "2020-2-12 00:00:00" AND "2020-2-12 23:59:59";
+-- SELECT food_user.user_id, sum(calories), sum(protein), sum(fat), sum(carbs), sum(water) from food_user
+-- JOIN food 
+-- on food_id = food.id
+-- where food_user.user_id=1 and date_now BETWEEN "2020-2-12 00:00:00" AND "2020-2-12 23:59:59";
 
 
 
--- -- SELECT * FROM user;
+-- SELECT * FROM user;
 -- -- SELECT * FROM food;
 -- SELECT * FROM food_user;
 
@@ -39,3 +39,16 @@ where food_user.user_id=1 and date_now BETWEEN "2020-2-12 00:00:00" AND "2020-2-
 
 
 -- where date_now BETWEEN STR_TO_DATE("2020-2-5 00:00:00","%Y-%m-%d %h:%i:%s") AND STR_TO_DATE("2020-2-12 23:59:59","%Y-%m-%d %h:%i:%s");
+
+-- ALTER TABLE food
+-- ADD sugar FLOAT;
+
+-- UPDATE food SET sugar = 15 where id = 2;
+-- UPDATE food SET sugar = 16 where id = 3;
+
+-- SELECT * from target_goals
+-- JOIN user 
+-- ON user_id = user.id 
+-- where user.id = 2 
+
+-- SELECT * FROM target_goals;

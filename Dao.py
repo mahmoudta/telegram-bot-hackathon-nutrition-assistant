@@ -21,14 +21,14 @@ def get_all_food():
             res = cursor.fetchall()
             for row in res:
                 food_list.append(
-                    (row["id"], row["name"], row["weight"], row["calories"], row["fat"], row["carbs"], row["water"]))
+                    (row["id"], row["name"], row["weight"], row["calories"], row["fat"], row["carbs"], row["water"], row["sugar"]))
             return food_list
     except Exception as e:
         print("get_all_food")
         print(e)
 
 
-def get_or_insert_food(food_name, weight, calories, protein, fat, carbs, water):
+def get_or_insert_food(food_name, weight, calories, protein, fat, carbs, water, sugar):
     query = f"select id from food where food.name ='{food_name}'"
     try:
         with connection.cursor() as cursor:
@@ -37,18 +37,18 @@ def get_or_insert_food(food_name, weight, calories, protein, fat, carbs, water):
             if result:
                 return result["id"]
             else:
-                return insert_food(food_name, weight, calories, protein, fat, carbs, water)
+                return insert_food(food_name, weight, calories, protein, fat, carbs, water, sugar)
             # if result == None
     except Exception as e:
         print("get_or_insert_name")
         print(e)
 
 
-def insert_food(food_name, weight, calories, protein, fat, carbs, water):
+def insert_food(food_name, weight, calories, protein, fat, carbs, water, sugar):
     try:
         with connection.cursor() as cursor:
-            query = 'INSERT into food(name, weight,calories,protein,fat,carbs,water) values (%s,%s,%s,%s,%s,%s,%s)'
-            cursor.execute(query, args=[food_name, weight, calories, protein, fat, carbs, water])
+            query = 'INSERT into food(name, weight,calories,protein,fat,carbs,water, sugar) values (%s,%s,%s,%s,%s,%s,%s,%s)'
+            cursor.execute(query, args=[food_name, weight, calories, protein, fat, carbs, water, sugar])
             # connection.commit()
             return cursor.lastrowid
     except Exception as e:
@@ -143,13 +143,42 @@ def get_today_food_progresss(user_id):
     sum(protein), 
     sum(fat), 
     sum(carbs), 
-    sum(water) 
+    sum(water),
+    sum(sugar)
     FROM food_user 
     JOIN food on food_id = food.id 
-    where food_user.user_id=1 and date_now BETWEEN "{formated_today_date} 00:00:00" AND "{formated_today_date} 23:59:59";'''
+    where food_user.user_id={user_id} and date_now BETWEEN "{formated_today_date} 00:00:00" AND "{formated_today_date} 23:59:59";'''
 
     with connection.cursor() as cursor:
         cursor.execute(query)
         result = cursor.fetchall()
         return result
 
+
+def get_last_week_food_progresss(user_id):
+    last_day_of_the_week = datetime.date.today()
+    first_day_of_the_week = last_day_of_the_week - datetime.timedelta(days=7)
+    formated_last_day_of_the_week = last_day_of_the_week.strftime('%Y-%m-%d')
+    formated_first_day_of_the_week = first_day_of_the_week.strftime('%Y-%m-%d')
+    
+    # 2020-2-10
+    query = f'''SELECT 
+    sum(calories), 
+    sum(protein), 
+    sum(fat), 
+    sum(carbs), 
+    sum(water),
+    sum(sugar)
+    FROM food_user 
+    JOIN food on food_id = food.id 
+    where food_user.user_id={user_id} and date_now BETWEEN "{formated_first_day_of_the_week} 00:00:00" AND "{formated_last_day_of_the_week} 23:59:59";'''
+
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+
+
+
+if __name__ == "__main__":
+    print(get_last_week_food_progresss(1))

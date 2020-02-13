@@ -15,7 +15,7 @@ def func_cunsumed(command, user_info):
         nutrition = edamam_api.get_nutritions(sentence)
 
 
-        food_id = Dao.get_or_insert_food(nutrition["name"],nutrition["weight"],nutrition["calories"],nutrition["protein"],nutrition["total_fat"],nutrition["carbs"],nutrition["water"])
+        food_id = Dao.get_or_insert_food(nutrition["name"],nutrition["weight"],nutrition["calories"],nutrition["protein"],nutrition["total_fat"],nutrition["carbs"],nutrition["water"], nutrition['sugar'])
 
         now=datetime.date.today()
         now=now.strftime('%Y-%m-%d')

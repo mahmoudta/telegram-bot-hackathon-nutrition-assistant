@@ -6,5 +6,6 @@ def check_pretty(json):
     protein = json["protein"]
     water = json["water"]
     weight = json["weight"]
+    sugar = json["sugar"]
     return f"{name} has  {weight} weight\n {calories} calories,\n {total_fat:.3f} fats,\n" \
-           f" {carbs:.3f} carbs,\n {protein:.3f} proteins,\n {water:.3f} water \n"
+           f" {carbs:.3f} carbs,\n {protein:.3f} proteins,\n {water:.3f} water \n {sugar:.3f} sugar \n"
