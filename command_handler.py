@@ -49,7 +49,7 @@ def handle_atractive_insert(command, user_info):
     if len(arg) == 4:
         respond = func_atractive_insert(command, user_info)
         title = "Choose your gender"
-        custom_keyboard = [['F'], ['M']]
+        custom_keyboard = [['Female'], ['Male']]
         connect_to_bot.add_botton(user_info['id'], custom_keyboard, title)
     else:
         respond = the_right_way
@@ -110,8 +110,8 @@ def handle_bmi(command, user_info):
     response = ""
     if bmi < 18.5:
         response = "C'mon you need to eat more!"
-    elif bmi > 30:
-        response = "You are heavy!\nEat and less and become healthy"
+    elif bmi > 27:
+        response = "You are heavy!\nEat less and become healthy, maybe got for a run ??"
     else:
         response = "Good job! Keep up the good effort"
     result = f"Your BMI is {bmi:.2f} and you are {bmi_status}!\n{response}"

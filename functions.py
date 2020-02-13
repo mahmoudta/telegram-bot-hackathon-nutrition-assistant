@@ -39,9 +39,9 @@ def func_cunsumed(command, user_info):
 
 
 def gender_str_to_bool(str_gender):
-    if str_gender == "M":
+    if str_gender[0] == "M":
         return True
-    elif str_gender == "F":
+    elif str_gender[0] == "F":
         return False
 
 
@@ -59,10 +59,6 @@ def func_init(command, user_info):
     weight = var_list[2]
     gender = var_list[3]
     gender_bool = gender_str_to_bool(gender)
-    if gender == "M":
-        gender_bool = True
-    elif gender == "F":
-        gender_bool = False
 
     exercise = var_list[4]
 

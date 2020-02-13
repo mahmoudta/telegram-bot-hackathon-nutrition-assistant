@@ -29,8 +29,8 @@ def parse_message(message, user_info):
 
 
 button_commands = {
-    'M': command_handler.handle_gender_botton,
-    'F': command_handler.handle_gender_botton,
+    'Male': command_handler.handle_gender_botton,
+    'Female': command_handler.handle_gender_botton,
     'low': command_handler.handle_exercise_botton,
     'medium': command_handler.handle_exercise_botton,
     'high': command_handler.handle_exercise_botton,
