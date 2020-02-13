@@ -55,6 +55,10 @@ def get_expected_calories_during_duration(current_weight, target_weight, duratio
         return "unreasonable"
 
 
+def calculate_protein_intake(current_weight):
+    return current_weight * 2.2
+
+
 if __name__ == "__main__":
     print(calculate_daily_calories(185, 80, 24, 'M', 'low'))
     bmi = calculate_bmi(80, 185)
