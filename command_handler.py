@@ -2,6 +2,7 @@ from functions import *
 import connect_to_bot
 from prettytable import PrettyTable
 
+
 def handle_start(command, user_info):
     respond = "there should be no<arg> for start, try again"
     arg = command.split()
@@ -34,6 +35,7 @@ def handle_init(command, user_info):
         respond = func_init(command, user_info)
     return respond
 
+
 def handle_atractive_insert(command, user_info):
     respond = "there should be  <age> <height> <weight> for insert, try again"
     arg = command.split()
@@ -42,23 +44,23 @@ def handle_atractive_insert(command, user_info):
 
         custom_keyboard = [['F', 'M']]
         title = "chose gender - male or female"
-        connect_to_bot.add_botton(user_info['id'], custom_keyboard,title)
+        connect_to_bot.add_botton(user_info['id'], custom_keyboard, title)
     return respond
 
-def handle_gender_botton(chatid,text):
+
+def handle_gender_botton(chatid, text):
     if text == "M":
         gender_bool = True
     elif text == "F":
         gender_bool = False
-    Dao.update_half_user_gender(chatid,gender_bool)
+    Dao.update_half_user_gender(chatid, gender_bool)
     connect_to_bot.removepreviusmarkup(chatid)
     custom_keyboard = [['low', 'medium', 'high']]
-    title= "chose daily exersise intencity - low or medium or high"
-    connect_to_bot.add_botton(chatid,custom_keyboard,title)
+    title = "chose daily exersise intencity - low or medium or high"
+    connect_to_bot.add_botton(chatid, custom_keyboard, title)
 
 
-def handle_exercise_botton(chatid,text):
-
+def handle_exercise_botton(chatid, text):
     connect_to_bot.removepreviusmarkup(chatid)
     user_data = Dao.get_user_data(chatid)
     height = user_data["height"]
@@ -70,7 +72,8 @@ def handle_exercise_botton(chatid,text):
     else:
         gender_type = "F"
 
-    target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender_type, text)
+    target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender_type,
+                                                                   text)
     target_protein = calories_calculator.calculate_protein_intake(int(weight))
 
     target_result = Dao.insert_user_target(chatid, 0, target_calories, target_protein, 0)
@@ -96,7 +99,14 @@ def handle_bmi(command, user_info):
     weight = total_result["weight"]
     bmi = calories_calculator.calculate_bmi(weight, height)
     bmi_status = calories_calculator.get_adults_bmi_status(bmi)
-    result = f"Your BMI is {bmi:.2f} and you are {bmi_status}"
+    response = ""
+    if bmi < 18.5:
+        response = "C'mon you need to eat more!"
+    elif bmi > 30:
+        response = "You are heavy!\nEat and less and become healthy"
+    else:
+        response = "Good job! Keep up the good effort"
+    result = f"Your BMI is {bmi:.2f} and you are {bmi_status}!\n{response}"
     return result
 
 
@@ -139,4 +149,9 @@ def handle_all_info(command, user_info):
     t = PrettyTable(['Type', 'Consumed', 'Target', "   %   "])
     t.add_row(['Calories', calories, target_calories, calories_percentage + "%"])
     t.add_row(['Protein', protein_nice, target_protein, protein_percentage + "%"])
-    return f"{t.__str__()}\n Remaining calories are <i>{target_calories - calories}</i> \n"
+    extra_info = ""
+    if float(calories_percentage) > 75:
+        extra_info = "You are near your limit!\nThink carefully when eating!\nUse /check before consuming your food\n"
+    elif float(protein_percentage) > 60:
+        extra_info = "You are near your protein goal!\nGood job!\n"
+    return f"{extra_info}{t.__str__()}\n Remaining calories are <i>{target_calories - calories}</i> \n"
