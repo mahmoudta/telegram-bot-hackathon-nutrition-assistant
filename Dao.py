@@ -1,4 +1,5 @@
 import pymysql
+import datetime
 
 connection = pymysql.connect(
     host="localhost",
@@ -75,6 +76,34 @@ def insert_user(id, name, age, height, weight, gender):
         return e
 
 
+def insert_half_user(id, name, age, height, weight):
+    try:
+        with connection.cursor() as cursor:
+            query = 'INSERT into User(id,name,age,height,weight) values (%s,%s,%s,%s,%s)'
+            cursor.execute(query, args=[id, name, age, height, weight])
+            connection.commit()
+            return True
+    except Exception as e:
+        return False
+        print("insert_half_user")
+        print(e)
+        return e
+
+
+def update_half_user_gender(id, gender):
+    try:
+        with connection.cursor() as cursor:
+            q = f"UPDATE User SET gender = {gender} where User.id = {id}"
+            cursor.execute(q)
+            connection.commit()
+            return True
+    except Exception as e:
+        return False
+        print("update_half_user_gender")
+        print(e)
+        return e
+
+
 # --   user_id INT,
 # --   target_weight INT,
 # --   target_calories INT,
@@ -130,3 +159,83 @@ def get_calories_for_user(user_id):
     except Exception as e:
         print("get_or_insert_name")
         print(e)
+
+
+def get_bmi(user_id):
+    query = f"select height,weight from user where user.id = {user_id} "
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+            return result
+            # if result == None
+    except Exception as e:
+        print("get_or_insert_name")
+        print(e)
+
+
+def get_all_user_food(user_id):
+    query = f"select f.name from food as f, food_user as fu, User as u where" \
+            f" f.id = fu.food_id and fu.user_id = u.id and u.id =  {user_id} "
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            result_list = list()
+            for i in result:
+                result_list.append(i["name"])
+            return result_list
+            # if result == None
+    except Exception as e:
+        print("get_or_insert_name")
+        print(e)
+
+
+def get_target_protein(user_id):
+    query = f"select target_goals.target_protein from user, target_goals where user.id = target_goals.user_id and " \
+            f"user.id = {user_id} "
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+            return result
+            # if result == None
+    except Exception as e:
+        print("get_or_insert_name")
+        print(e)
+
+
+def get_all_user_id():
+    query = f"select id from user"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            result_list = list()
+            for i in result:
+                result_list.append(i["id"])
+            return result_list
+            # if result == None
+    except Exception as e:
+        print("get_all_user_id")
+        print(e)
+
+
+def get_today_food_progress(user_id):
+    today_date = datetime.date.today()
+    formated_today_date = today_date.strftime('%Y-%m-%d')
+    # 2020-2-10
+    query = f'''SELECT 
+    sum(calories), 
+    sum(protein), 
+    sum(fat), 
+    sum(carbs), 
+    sum(water) 
+    FROM food_user 
+    JOIN food on food_id = food.id 
+    where food_user.user_id={user_id} and date_now BETWEEN "{formated_today_date} 00:00:00" AND "{formated_today_date} 23:59:59"'''
+
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result

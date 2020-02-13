@@ -70,6 +70,8 @@ def get_weight(json_nutrition):
 
 def get_nutritions(food_text):
     nutrition_json = get_nutrition_json(food_text)
+    if not nutrition_json:
+        return None
     nutritions = {
         'name': get_name(nutrition_json),
         'calories': get_total_cal(nutrition_json),

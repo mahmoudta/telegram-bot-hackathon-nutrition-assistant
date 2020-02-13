@@ -14,7 +14,7 @@ LOCAL_WEBHOOK_ENDPOINT = '{}/message'.format(NGROK_URL)
 TELEGRAM_INIT_WEBHOOK_URL = BASE_TELEGRAM_URL + '/setWebhook?url={}'.format(LOCAL_WEBHOOK_ENDPOINT)
 
 # url to send to user need (the chat id from ['message']['chat']['id'] , message to send back)
-TELEGRAM_SEND_MESSAGE_URL = BASE_TELEGRAM_URL + '/sendMessage?chat_id={}&text={}'
+TELEGRAM_SEND_MESSAGE_URL = BASE_TELEGRAM_URL + '/sendMessage?chat_id={}&text={}&parse_mode=HTML'
 
 TELEGRAM_SEND_BOTTON_URL=TELEGRAM_SEND_MESSAGE_URL+'&reply_markup={}'
 
