@@ -37,24 +37,23 @@ def handle_init(command, user_info):
 
 
 def handle_atractive_insert(command, user_info):
-
     respond = "there should be  <age> <height> <weight> for insert command, try again"
     arg = command.split()
     if len(arg) == 4:
         respond = func_atractive_insert(command, user_info)
 
-        custom_keyboard = [['F', 'M']]
+        custom_keyboard = [['F'], ['M']]
         title = "chose gender - male or female"
         connect_to_bot.add_botton(user_info['id'], custom_keyboard, title)
     return respond
 
-def handle_gender_botton(chatid,text):
 
-    gender_bool=gender_str_to_bool(text)
-    Dao.update_half_user_gender(chatid,gender_bool)
+def handle_gender_botton(chatid, text):
+    gender_bool = gender_str_to_bool(text)
+    Dao.update_half_user_gender(chatid, gender_bool)
     connect_to_bot.removepreviusmarkup(chatid)
-    custom_keyboard = [['low', 'medium', 'high']]
-    title = "chose daily exersise intencity - low or medium or high"
+    custom_keyboard = [[['low'], ['medium'], ['high']]]
+    title = "chose daily exercise intensity - low or medium or high"
     connect_to_bot.add_botton(chatid, custom_keyboard, title)
 
 
@@ -64,7 +63,7 @@ def handle_exercise_botton(chatid, text):
     height = user_data["height"]
     weight = user_data["weight"]
     age = user_data["age"]
-    gender_type=gender_bool_to_str(user_data["gender"])
+    gender_type = gender_bool_to_str(user_data["gender"])
 
     target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender_type,
                                                                    text)
@@ -131,7 +130,6 @@ def get_percentage_calories(user_info):
 
 
 def handle_all_info(command, user_info):
-
     calories = func_today_calories(user_info)
     target_calories = func_get_calories(user_info)["target_calories"]
     protein = func_today_protein(user_info)
@@ -145,8 +143,16 @@ def handle_all_info(command, user_info):
     t.add_row(['Calories', calories, target_calories, calories_percentage + "%"])
     t.add_row(['Protein', protein_nice, target_protein, protein_percentage + "%"])
     extra_info = ""
-    if float(calories_percentage) > 75:
+    if float(calories_percentage) > 100:
+        extra_info = "You are over your limit!\nThink of burning some calories!\nMaybe go for a run?\n"
+    elif float(calories_percentage) > 75:
         extra_info = "You are near your limit!\nThink carefully when eating!\nUse /check before consuming your food\n"
     elif float(protein_percentage) > 60:
         extra_info = "You are near your protein goal!\nGood job!\n"
-    return f"{extra_info}{t.__str__()}\n Remaining calories are <i>{target_calories - calories}</i> \n"
+
+    if target_calories < calories:
+        extra_extra_info = f"Surplass of <i>{calories - target_calories} calories</i>"
+    else:
+        extra_extra_info = f"Remaining calories of <i>{calories - target_calories}</i>"
+
+    return f"{extra_info}{t.__str__()}\n{extra_extra_info} \n"
