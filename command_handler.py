@@ -7,7 +7,6 @@ def handle_start(command, user_info):
     arg = command.split()
     if len(arg) == 1:
         respond = func_start(command)
-
     return respond
 
 
@@ -82,7 +81,6 @@ def handle_help(command, user_info):
     arg = command.split()
     if len(arg) == 1:
         respond = func_help(command)
-
     return respond
 
 

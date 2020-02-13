@@ -4,7 +4,7 @@ import datetime
 connection = pymysql.connect(
     host="localhost",
     user="root",
-    password="toortoor",
+    password="toor2005",
     db="sql_testing",
     charset="utf8",
     cursorclass=pymysql.cursors.DictCursor

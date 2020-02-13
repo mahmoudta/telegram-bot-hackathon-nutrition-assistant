@@ -5,8 +5,8 @@ from telegram import ReplyKeyboardRemove, ReplyKeyboardMarkup
 
 
 # base urls
-TOKEN = '956187001:AAE7MX75_O7fO_6bKHHggO36sAkgpGiGunY'
-NGROK_URL = 'https://da4d3727.ngrok.io'
+TOKEN = '1040555856:AAEeMTa4pUEa_ERPYtf8dhMCisGaqVXG_18'
+NGROK_URL = 'https://325c06ce.ngrok.io'
 BASE_TELEGRAM_URL = 'https://api.telegram.org/bot{}'.format(TOKEN)
 LOCAL_WEBHOOK_ENDPOINT = '{}/message'.format(NGROK_URL)
 

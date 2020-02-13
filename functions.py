@@ -6,7 +6,7 @@ import calories_calculator
 
 
 def func_start(command):
-    return func_help(command)
+    return "start"
 
 
 def func_cunsumed(command, user_info):
@@ -52,13 +52,15 @@ def func_init(command, user_info):
     insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight, gender_bool)
     # def calculate_daily_calories(height, weight, age, gender, exercise):
     if insert_result:
-        target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender,exercise)
+        target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender,
+                                                                       exercise)
         target_protein = calories_calculator.calculate_protein_intake(int(weight))
         target_result = Dao.insert_user_target(user_info['id'], 0, target_calories, target_protein, 0)
         response = "You got inserted"
     else:
         response = "There was an issue"
     return response
+
 
 def func_atractive_insert(command, user_info):
     var_list = command.split()[1:]
@@ -72,6 +74,7 @@ def func_atractive_insert(command, user_info):
     else:
         response = "There was an issue in functions.func_atractive_insert"
     return response
+
 
 def func_check(command):
     try:
@@ -135,11 +138,12 @@ def func_get_target_protein(user_info):
 
 
 def func_help(command):
-    return 'commands list :\n ' \
-           '/start  to initi details.\n ' \
-           '/insert insert your data as follows <age> <height> <weight> <gender> <exercise> gender exercise should be (M|F) exercise should be (low|medium|high).\n ' \
-           '/check  to check nutrethion in food.\n ' \
-           '/calories  get you recommended remainig calories for the day.\n ' \
-           '/consume  inform us of a consumed food to update.\n ' \
-           '/bmi  inform us of a consumed food .\n ' \
-           '/help - to get to this* command list. \n '
+    return "commands list :\n" \
+           "/start session \n" \
+           "/insert to insert you data as age, height, weight \n" \
+           "gender is as (M|F) and exercise as (low|medium|high).\n " \
+           "/check to check nutrition in food\n" \
+           "/calories, get remaining calories and your current daily calories" \
+           "/consume item adds food \n" \
+           "/bmi return your bmi\n" \
+           "/help - get this command list"

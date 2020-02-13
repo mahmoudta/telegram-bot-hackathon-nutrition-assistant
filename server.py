@@ -19,7 +19,7 @@ def handle_message():
         print(chat_data)
         tosendback = " "
 
-        if  'entities' in chat_data['message']:
+        if 'entities' in chat_data['message']:
             user_info = chat_data['message']['chat']
             message = chat_data['message']['text']
             bot_testing.print_message_info(user_info, message)
@@ -29,7 +29,7 @@ def handle_message():
 
         send_message_to_user(chat_data, tosendback)
 
-    except :
+    except:
         print("exception provoked from server.handle_message")
 
     return Response("success")
