@@ -52,7 +52,7 @@ def handle_gender_botton(chatid, text):
     gender_bool = gender_str_to_bool(text)
     Dao.update_half_user_gender(chatid, gender_bool)
     connect_to_bot.removepreviusmarkup(chatid)
-    custom_keyboard = [[['low'], ['medium'], ['high']]]
+    custom_keyboard = [['low'], ['medium'], ['high']]
     title = "chose daily exercise intensity - low or medium or high"
     connect_to_bot.add_botton(chatid, custom_keyboard, title)
 
