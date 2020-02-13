@@ -1,9 +1,9 @@
 # NutriBot
 
-Project name is `Diet tracker` it allows `someone who wants to maintain or reach his goal wait` to `monitor his daily consumption and alert him regarding his left calories`.
+Project name is `Diet tracker` it allows `someone who wants to maintain or reach his goal weight` to `monitor his daily consumption and alert him regarding his left calories`.
 
-![Template GIF](https://media.giphy.com/media/H8E1H1H63TDjsPutZY/giphy.gif)
-
+![Template GIF](https://media.giphy.com/media/H8E1H1H63TDjsPutZY/giphy.gif)![Template2 GIF](https://media.giphy.com/media/mBAIM5lBz263vI5onS/giphy.gif
+)
 <!-- Additional line of information text about what the project does. Your introduction should be around 2 or 3 sentences. Don't go overboard, people won't read it. -->
 
 ## Prerequisites
