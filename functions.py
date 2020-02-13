@@ -57,6 +57,20 @@ def func_init(command, user_info):
         response = "There was an issue"
     return response
 
+def func_atractive_insert(command, user_info):
+    var_list = command.split()[1:]
+    age = var_list[0]
+    height = var_list[1]
+    weight = var_list[2]
+    insert_result=True
+    #insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight)
+    # def calculate_daily_calories(height, weight, age, gender, exercise):
+    if insert_result:
+
+        response = "You got inserted"
+    else:
+        response = "There was an issue in functions.func_atractive_insert"
+    return response
 
 def func_check(command):
     try:
