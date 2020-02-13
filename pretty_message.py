@@ -7,7 +7,7 @@ def check_pretty(json):
     water = json["water"]
     weight = json["weight"]
 
-    if int(calories) > 300:
+    if int(calories) > 400:
         return f"Seriously?? Take care of yourself!!!\n" \
                f"A {name} weighs {weight:.2f} gm\n{calories} calories\n{total_fat:.3f} fats\n" \
                f"{carbs:.3f} carbs\n{protein:.3f}proteins\n{water:.3f} water\n" \

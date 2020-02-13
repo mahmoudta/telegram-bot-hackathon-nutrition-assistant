@@ -17,6 +17,7 @@ requests==2.22.0
 flask==1.1.1
 python-telegram-bot==12.4.2
 prettytable==0.7.2
+pymysql==0.9.3
 ```
 
 ## Installing NutriBot
