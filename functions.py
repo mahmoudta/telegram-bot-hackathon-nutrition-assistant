@@ -52,13 +52,9 @@ def func_init(command, user_info):
     insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight, gender_bool)
     # def calculate_daily_calories(height, weight, age, gender, exercise):
     if insert_result:
-        target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender,
-                                                                       exercise)
+        target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender,exercise)
         target_protein = calories_calculator.calculate_protein_intake(int(weight))
-        print(target_calories)
         target_result = Dao.insert_user_target(user_info['id'], 0, target_calories, target_protein, 0)
-        print(target_calories)
-        print(target_result)
         response = "You got inserted"
     else:
         response = "There was an issue"
@@ -69,9 +65,7 @@ def func_atractive_insert(command, user_info):
     age = var_list[0]
     height = var_list[1]
     weight = var_list[2]
-    insert_result=True
-    #insert_result = Dao.insert_user(user_info['id'], user_info['username'], age, height, weight)
-    # def calculate_daily_calories(height, weight, age, gender, exercise):
+    insert_result = Dao.insert_half_user(user_info['id'], user_info['username'], age, height, weight)
     if insert_result:
 
         response = "You got inserted"

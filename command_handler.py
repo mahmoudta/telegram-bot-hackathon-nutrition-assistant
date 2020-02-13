@@ -46,17 +46,35 @@ def handle_atractive_insert(command, user_info):
         connect_to_bot.add_botton(user_info['id'], custom_keyboard,title)
     return respond
 
-def handle_gender_botton(chatid):
-
+def handle_gender_botton(chatid,text):
+    if text == "M":
+        gender_bool = True
+    elif text == "F":
+        gender_bool = False
+    Dao.update_half_user_gender(chatid,gender_bool)
     connect_to_bot.removepreviusmarkup(chatid)
     custom_keyboard = [['low', 'medium', 'high']]
     title= "chose daily exersise intencity - low or medium or high"
     connect_to_bot.add_botton(chatid,custom_keyboard,title)
 
 
-def handle_exercise_botton(chatid):
+def handle_exercise_botton(chatid,text):
 
     connect_to_bot.removepreviusmarkup(chatid)
+    user_data = Dao.get_user_data(chatid)
+    height = user_data["height"]
+    weight = user_data["weight"]
+    age = user_data["age"]
+    gender = user_data["gender"]
+    if gender:
+        gender_type = "M"
+    else:
+        gender_type = "F"
+
+    target_calories = calories_calculator.calculate_daily_calories(int(height), int(weight), int(age), gender_type, text)
+    target_protein = calories_calculator.calculate_protein_intake(int(weight))
+
+    target_result = Dao.insert_user_target(chatid, 0, target_calories, target_protein, 0)
 
 
 def handle_help(command, user_info):

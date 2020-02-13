@@ -42,7 +42,7 @@ def button_parser(chat_data):
         text = chat_data['message']['text']
 
         if text in button_commands:
-            tosendback = button_commands[text](chat_data['message']['from']['id'])
+            tosendback = button_commands[text](chat_data['message']['from']['id'],text)
         else:
             tosendback = "unaccepted input"
 

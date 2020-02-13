@@ -239,3 +239,16 @@ def get_today_food_progress(user_id):
         cursor.execute(query)
         result = cursor.fetchall()
         return result
+
+
+def get_user_data(user_id):
+    query = f"select weight,height,gender,age from user where user.id = {user_id}"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            result = cursor.fetchone()
+            return result
+            # if result == None
+    except Exception as e:
+        print("get_all_user_id")
+        print(e)
